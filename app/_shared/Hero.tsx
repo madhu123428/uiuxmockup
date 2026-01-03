@@ -36,7 +36,6 @@ function Hero() {
     if (!userInput) {
       return;
     }
-    try {
       setLoading(true);
       const projectId = crypto.randomUUID();
       const result = await axios.post('/api/project', {
@@ -45,11 +44,10 @@ function Hero() {
         projectId: projectId,
       });
       console.log(result.data);
-    } catch (err) {
-      console.error("Project creation failed", err);
-    } finally {
+     
       setLoading(false);
-    }
+
+      router.push('/project/' + projectId);
   };
   return (
     <div className="p-10 md:px-24 lg:px-48 xl:px-60 mt-10">
