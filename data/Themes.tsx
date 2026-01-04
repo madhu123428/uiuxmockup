@@ -1,209 +1,209 @@
 export const THEMES = {
-  AURORA_INK: {
-    background: "#0b1020",
-    foreground: "#f4f6ff",
+  GOT: {
+    background: "#0e1116",
+    foreground: "#e6e8eb",
 
-    card: "#121a33",
-    cardForeground: "#f4f6ff",
+    card: "#161b22",
+    cardForeground: "#e6e8eb",
 
-    popover: "#121a33",
-    popoverForeground: "#f4f6ff",
+    popover: "#161b22",
+    popoverForeground: "#e6e8eb",
 
-    primary: "#7c5cff",
-    primaryRgb: "124, 92, 255",
-    primaryForeground: "#0b1020",
+    primary: "#c9a24d",
+    primaryRgb: "201, 162, 77",
+    primaryForeground: "#0e1116",
 
-    secondary: "#1a2547",
-    secondaryForeground: "#e8ebff",
+    secondary: "#1f2630",
+    secondaryForeground: "#e6e8eb",
 
-    muted: "#141d3a",
-    mutedForeground: "#a9b2d6",
+    muted: "#1a202a",
+    mutedForeground: "#9da5b4",
 
-    accent: "#2fe6c7",
-    accentForeground: "#0b1020",
-
-    destructive: "#ff4d6d",
-
-    border: "#202c56",
-    input: "#202c56",
-    ring: "#7c5cff",
-    radius: "0.9rem",
-
-    chart: ["#7c5cff", "#2fe6c7", "#ffb84d", "#ff4d6d", "#66a6ff"],
-  },
-
-  DUSTY_ORCHID: {
-    background: "#fbf7fb",
-    foreground: "#221827",
-
-    card: "#ffffff",
-    cardForeground: "#221827",
-
-    popover: "#ffffff",
-    popoverForeground: "#221827",
-
-    primary: "#b24c7c",
-    primaryRgb: "178, 76, 124",
-    primaryForeground: "#ffffff",
-
-    secondary: "#f1e6f0",
-    secondaryForeground: "#221827",
-
-    muted: "#efe2ed",
-    mutedForeground: "#6b5871",
-
-    accent: "#3aa6a6",
-    accentForeground: "#0f172a",
-
-    destructive: "#e23a53",
-
-    border: "#e4d6e2",
-    input: "#ffffff",
-    ring: "#b24c7c",
-    radius: "0.75rem",
-
-    chart: ["#b24c7c", "#3aa6a6", "#f0a24f", "#6a4fb3", "#2f6fdf"],
-  },
-  CITRUS_SLATE: {
-    background: "#0f141a",
-    foreground: "#f5f7fb",
-
-    card: "#151c24",
-    cardForeground: "#f5f7fb",
-
-    popover: "#151c24",
-    popoverForeground: "#f5f7fb",
-
-    primary: "#ff7a2f",
-    primaryRgb: "255, 122, 47",
-    primaryForeground: "#0f141a",
-
-    secondary: "#1f2a36",
-    secondaryForeground: "#f5f7fb",
-
-    muted: "#18212c",
-    mutedForeground: "#aab5c3",
-
-    accent: "#7dd3ff",
-    accentForeground: "#0f141a",
-
-    destructive: "#ff3b5c",
-
-    border: "#2a394a",
-    input: "#2a394a",
-    ring: "#ff7a2f",
-    radius: "0.6rem",
-
-    chart: ["#ff7a2f", "#7dd3ff", "#9bff8b", "#c28bff", "#ffd36a"],
-  },
-
-  MOSS_PARCHMENT: {
-    background: "#f7f5ef",
-    foreground: "#1d261f",
-
-    card: "#ffffff",
-    cardForeground: "#1d261f",
-
-    popover: "#ffffff",
-    popoverForeground: "#1d261f",
-
-    primary: "#2f7d4a",
-    primaryRgb: "47, 125, 74",
-    primaryForeground: "#ffffff",
-
-    secondary: "#e7efe5",
-    secondaryForeground: "#1d261f",
-
-    muted: "#e3eadf",
-    mutedForeground: "#5f6f63",
-
-    accent: "#b26d2d",
+    accent: "#9b1c1c",
     accentForeground: "#ffffff",
 
-    destructive: "#d94444",
+    destructive: "#b91c1c",
 
-    border: "#d6e0d4",
-    input: "#ffffff",
-    ring: "#2f7d4a",
-    radius: "1rem",
-
-    chart: ["#2f7d4a", "#b26d2d", "#2b6cb0", "#8a4fff", "#d94444"],
-  },
-
-  POLAR_MINT: {
-    background: "#f2fbff",
-    foreground: "#0d1b2a",
-
-    card: "#ffffff",
-    cardForeground: "#0d1b2a",
-
-    popover: "#ffffff",
-    popoverForeground: "#0d1b2a",
-
-    primary: "#00a6a6",
-    primaryRgb: "0, 166, 166",
-    primaryForeground: "#ffffff",
-
-    secondary: "#e3f6f8",
-    secondaryForeground: "#0d1b2a",
-
-    muted: "#d7f0f4",
-    mutedForeground: "#3e6470",
-
-    accent: "#5b7cfa",
-    accentForeground: "#ffffff",
-
-    destructive: "#ff4b4b",
-
-    border: "#cfe6ee",
-    input: "#ffffff",
-    ring: "#00a6a6",
-    radius: "0.85rem",
-
-    chart: ["#00a6a6", "#5b7cfa", "#ffb020", "#ff4b4b", "#7a52cc"],
-  },
-
-  OBSIDIAN_BLOOM: {
-    background: "#0a0a0d",
-    foreground: "#f7f7fb",
-
-    card: "#14141a",
-    cardForeground: "#f7f7fb",
-
-    popover: "#14141a",
-    popoverForeground: "#f7f7fb",
-
-    primary: "#ff4fd8",
-    primaryRgb: "255, 79, 216",
-    primaryForeground: "#0a0a0d",
-
-    secondary: "#1c1c25",
-    secondaryForeground: "#f7f7fb",
-
-    muted: "#171720",
-    mutedForeground: "#a8a8b8",
-
-    accent: "#6dffb2",
-    accentForeground: "#0a0a0d",
-
-    destructive: "#ff3d5a",
-
-    border: "#2a2a37",
-    input: "#2a2a37",
-    ring: "#ff4fd8",
+    border: "#2b3442",
+    input: "#2b3442",
+    ring: "#c9a24d",
     radius: "0.7rem",
 
-    chart: ["#ff4fd8", "#6dffb2", "#5cc8ff", "#ffb84d", "#b18cff"],
+    chart: ["#c9a24d", "#9b1c1c", "#4b5563", "#2563eb", "#7c3aed"],
+  },
+  STRANGER_THINGS: {
+    background: "#0b0b12",
+    foreground: "#f2f2f7",
+
+    card: "#141420",
+    cardForeground: "#f2f2f7",
+
+    popover: "#141420",
+    popoverForeground: "#f2f2f7",
+
+    primary: "#e50914",
+    primaryRgb: "229, 9, 20",
+    primaryForeground: "#ffffff",
+
+    secondary: "#1f1f2e",
+    secondaryForeground: "#f2f2f7",
+
+    muted: "#191926",
+    mutedForeground: "#9aa0b3",
+
+    accent: "#00e5ff",
+    accentForeground: "#0b0b12",
+
+    destructive: "#ff3b3b",
+
+    border: "#2a2a3d",
+    input: "#2a2a3d",
+    ring: "#e50914",
+    radius: "0.85rem",
+
+    chart: ["#e50914", "#00e5ff", "#ffb703", "#9b5cff", "#3a86ff"],
+  },
+
+  MONEY_HEIST: {
+    background: "#ffffff",
+    foreground: "#111111",
+
+    card: "#f8f8f8",
+    cardForeground: "#111111",
+
+    popover: "#f8f8f8",
+    popoverForeground: "#111111",
+
+    primary: "#d90429",
+    primaryRgb: "217, 4, 41",
+    primaryForeground: "#ffffff",
+
+    secondary: "#f1f1f1",
+    secondaryForeground: "#111111",
+
+    muted: "#ededed",
+    mutedForeground: "#555555",
+
+    accent: "#000000",
+    accentForeground: "#ffffff",
+
+    destructive: "#ef233c",
+
+    border: "#dddddd",
+    input: "#ffffff",
+    ring: "#d90429",
+    radius: "0.75rem",
+
+    chart: ["#d90429", "#000000", "#8d99ae", "#ef233c", "#2b2d42"],
+  },
+
+  BREAKING_BAD: {
+    background: "#fdf6e3",
+    foreground: "#3b3b3b",
+
+    card: "#ffffff",
+    cardForeground: "#3b3b3b",
+
+    popover: "#ffffff",
+    popoverForeground: "#3b3b3b",
+
+    primary: "#f4d03f",
+    primaryRgb: "244, 208, 63",
+    primaryForeground: "#3b3b3b",
+
+    secondary: "#f6e8b1",
+    secondaryForeground: "#3b3b3b",
+
+    muted: "#efe6c8",
+    mutedForeground: "#6b6b6b",
+
+    accent: "#2ecc71",
+    accentForeground: "#0b2e13",
+
+    destructive: "#c0392b",
+
+    border: "#e0d8b0",
+    input: "#ffffff",
+    ring: "#f4d03f",
+    radius: "0.9rem",
+
+    chart: ["#f4d03f", "#2ecc71", "#16a085", "#c0392b", "#2980b9"],
+  },
+
+  DARK: {
+    background: "#0c0c0c",
+    foreground: "#e5e5e5",
+
+    card: "#151515",
+    cardForeground: "#e5e5e5",
+
+    popover: "#151515",
+    popoverForeground: "#e5e5e5",
+
+    primary: "#ffb703",
+    primaryRgb: "255, 183, 3",
+    primaryForeground: "#0c0c0c",
+
+    secondary: "#1f1f1f",
+    secondaryForeground: "#e5e5e5",
+
+    muted: "#181818",
+    mutedForeground: "#9a9a9a",
+
+    accent: "#fb8500",
+    accentForeground: "#0c0c0c",
+
+    destructive: "#e63946",
+
+    border: "#2a2a2a",
+    input: "#2a2a2a",
+    ring: "#ffb703",
+    radius: "0.65rem",
+
+    chart: ["#ffb703", "#fb8500", "#8ecae6", "#219ebc", "#e63946"],
+  },
+
+  EUPHORIA: {
+    background: "#0a0215",
+    foreground: "#f7f1ff",
+
+    card: "#14072a",
+    cardForeground: "#f7f1ff",
+
+    popover: "#14072a",
+    popoverForeground: "#f7f1ff",
+
+    primary: "#c77dff",
+    primaryRgb: "199, 125, 255",
+    primaryForeground: "#0a0215",
+
+    secondary: "#1f0f3d",
+    secondaryForeground: "#f7f1ff",
+
+    muted: "#1a0c33",
+    mutedForeground: "#b9a7e3",
+
+    accent: "#4cc9f0",
+    accentForeground: "#001219",
+
+    destructive: "#ff477e",
+
+    border: "#2b1452",
+    input: "#2b1452",
+    ring: "#c77dff",
+    radius: "1rem",
+
+    chart: ["#c77dff", "#4cc9f0", "#ffbe0b", "#ff477e", "#3a86ff"],
   },
 } as const;
 
 export const THEME_NAME_LIST = [
-  "AURORA_INK",
-  "DUSTY_ORCHID",
-  "CITRUS_SLATE",
-  "MOSS_PARCHMENT",
-  "POLAR_MINT",
-  "OBSIDIAN_BLOOM",
+  "GOT",
+  "STRANGER_THINGS",
+  "MONEY_HEIST",
+  "BREAKING_BAD",
+  "DARK",
+  "EUPHORIA",
 ] as const;
 
 export type ThemeKey = keyof typeof THEMES;
