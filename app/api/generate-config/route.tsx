@@ -2,6 +2,7 @@ import { db } from "@/config/db";
 import { openrouter } from "@/config/openroute";
 import { ProjectTable, ScreenConfigTable } from "@/config/schema";
 import { APP_LAYOUT_CONFIG_PROMPT } from "@/data/Prompt";
+import { eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -40,7 +41,7 @@ export async function POST(req: NextRequest) {
       projectVisualDescription: JSONAiResult?.projectVisualDescription,
       projectName: JSONAiResult?.projectName,
       theme:JSONAiResult?.theme
-      //@ts-ignore
+     
     }).where(eq(ProjectTable.projectId,projectId as string));
     //Insert screen config
     JSONAiResult.screens?.forEach(async (screen: any) => {

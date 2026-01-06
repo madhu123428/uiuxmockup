@@ -6,10 +6,13 @@ import { useParams } from 'next/navigation'
 import axios from 'axios'
 import { ProjectType, ScreenConfig } from '@/type/types'
 import { Loader2Icon } from 'lucide-react'
+import Canvas from './_shared/Canvas'
+
 function ProjectCanvasPlayground() {
     const {projectId}=useParams();
     const [projectDetail,setProjectDetail]=useState<ProjectType>();
     const [screenConfig,setScreenConfig]=useState<ScreenConfig[]>([]);
+    const [screenConfigOriginal,setScreenConfigOriginal]=useState<ScreenConfig[]>([]);
     const [loading,setLoading]=useState(false);
     const [loadingMsg,setLoadingMsg]=useState('Loading')
     useEffect(()=>{
@@ -21,6 +24,7 @@ function ProjectCanvasPlayground() {
        const result=await axios.get('/api/project?projectId='+projectId)
        console.log(result.data)
        setProjectDetail(result?.data?.projectDetail);
+        setScreenConfigOriginal(result?.data?.screenConfig);
        setScreenConfig(result?.data?.screenConfig);
     //    if(result.data?.screenConfig?.length==0){
     //       generateScreenConfig();
@@ -28,13 +32,13 @@ function ProjectCanvasPlayground() {
        setLoading(false);
     }
     useEffect(()=>{
-       if(projectDetail&&screenConfig&&screenConfig.length===0){
+       if(projectDetail&&screenConfigOriginal&&screenConfigOriginal.length===0){
         generateScreenConfig();
        }
-       else if(projectDetail&&screenConfig){
+       else if(projectDetail&&screenConfigOriginal){
            GenerateScreenUIUX();
        }
-    },[projectDetail,screenConfig])
+    },[projectDetail,screenConfigOriginal])
     const generateScreenConfig=async()=>{
         setLoading(true);
         setLoadingMsg('Generating screen config...');
@@ -53,7 +57,7 @@ function ProjectCanvasPlayground() {
         for(let index=0;index<screenConfig?.length;index++){
             const screen=screenConfig[index];
             if(screen?.code)continue;
-            setLoadingMsg('Generating Screen'+ index+ 1)
+            setLoadingMsg('Generating Screen'+ index + 1)
             const result=await axios.post('/api/generate-screen-ui',{
                 projectId,
                 screenId:screen?.screenId,
@@ -70,7 +74,7 @@ function ProjectCanvasPlayground() {
   return (
     <div>
       <ProjectHeader />
-      <div>
+      <div className='flex '>
         {loading&&<div className='p-3 absolute bg-blue-300/20 left-1/2
          mt-20  border-blue-400 border rounded-2xl'>
             <h2 className='flex gap-2 items-center'><Loader2Icon className='animate-spin'/>{loadingMsg}</h2>
@@ -78,6 +82,9 @@ function ProjectCanvasPlayground() {
 
         {/* settings */}
         <SettingsSection projectDetail={projectDetail}/>
+
+        {/* canvas */}
+        <Canvas projectDetail={projectDetail} screenConfig={screenConfig} />
       </div>
     </div>
   )
