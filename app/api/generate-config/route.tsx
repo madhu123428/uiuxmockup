@@ -44,6 +44,7 @@ export async function POST(req: NextRequest) {
      
     }).where(eq(ProjectTable.projectId,projectId as string));
     //Insert screen config
+   
     JSONAiResult.screens?.forEach(async (screen: any) => {
       const result = await db.insert(ScreenConfigTable).values({
         projectId: projectId,
@@ -52,11 +53,12 @@ export async function POST(req: NextRequest) {
         screenId: screen?.id,
         screenName: screen.name,
       });
-    });
+    })
+  ;
     return NextResponse.json(JSONAiResult);
   }
   else{
-    NextResponse.json({msg:"internal server error"});
+    return NextResponse.json({msg:"internal server error"});
   }
   
 }
