@@ -196,12 +196,29 @@ NO JavaScript, NO canvas – SVG ONLY for charts
 Images rules:
 Avatars → https://i.pravatar.cc/400
 Other images → searchUnsplash ONLY
-Theme variables are PREDEFINED by parent – NEVER redeclare
+Theme variables are PREDEFINED by the parent iframe.
+NEVER redeclare :root.
+NEVER redefine CSS variables.
+ONLY CONSUME existing variables using var(--*).
+
 Use CSS variables for foundational colors ONLY:
 bg-[var(--background)]
 text-[var(--foreground)]
 bg-[var(--card)]
 User visual instructions ALWAYS override default rules
+ABSOLUTE THEME CONSTRAINT (NON-NEGOTIABLE):
+
+- DO NOT define :root anywhere.
+- DO NOT redefine CSS variables.
+- DO NOT include any <style> block that defines colors.
+- Theme variables are injected by the parent iframe and MUST NOT be overridden.
+- Any output containing:
+  • :root
+  • hex colors (#)
+  • rgb(), hsl()
+  • Tailwind color utilities (bg-white, bg-blue-500, text-gray-800, etc.)
+  is INVALID and must be regenerated internally.
+
 
 ────────────────────────────
 DESIGN QUALITY BAR
@@ -317,6 +334,13 @@ Root container clean and correct?
 Proper spacing, hierarchy, and polish?
 No forbidden content?
 Generate a stunning, production-ready UI mockup.
+FINAL HARD VALIDATION (MANDATORY):
+
+- If the output contains :root → STOP and regenerate.
+- If the output contains any hex color (#) → STOP and regenerate.
+- If the output uses bg-white, bg-black, text-gray-* → STOP and regenerate.
+Only output HTML that PASSES these checks.
+
 Start with <.
 End at last closing tag.
 `;

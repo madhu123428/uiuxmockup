@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import {
+  TransformWrapper,
+  TransformComponent,
+  useControls,
+} from "react-zoom-pan-pinch";
 import ScreenFrame from "./ScreenFrame";
 import { ProjectType, ScreenConfig } from "@/type/types";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Minus, Plus, RefreshCcw, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 type Props = {
   projectDetail: ProjectType | undefined;
   screenConfig: ScreenConfig[];
@@ -16,6 +22,19 @@ function Canvas({ projectDetail, screenConfig, loading }: Props) {
   const SCREEN_WIDTH = isMobile ? 400 : 1200;
   const SCREEN_HEIGHT = isMobile ? 800 : 800;
   const GAP = isMobile ? 10 : 20;
+
+  const Controls = () => {
+    const { zoomIn, zoomOut, resetTransform } = useControls();
+
+    return (
+      <div className="tools absolute p-3 px-3 bg-white shadow flex gap-3 rounded-4xl bottom-10 left-1/2 z-30 text-gray-500">
+        <Button variant={'ghost'} size={'sm'} onClick={() => zoomIn()}><Plus/></Button>
+        <Button variant={'ghost'} size={'sm'} onClick={() => zoomOut()}><Minus/></Button>
+        <Button variant={'ghost'} size={'sm'} onClick={() => resetTransform()}><RefreshCcw/></Button>
+      </div>
+    );
+  };
+
   return (
     <div
       className="w-full h-screen bg-gray-200"
@@ -36,38 +55,48 @@ function Canvas({ projectDetail, screenConfig, loading }: Props) {
         doubleClick={{ disabled: false }}
         panning={{ disabled: !panningEnabled }}
       >
-        <TransformComponent wrapperStyle={{ width: "100%", height: "100%" }}>
-          {screenConfig?.map((screen, index) => (
-            <div>
-              {screen?.code ? <ScreenFrame
-                x={index * (SCREEN_WIDTH + GAP)}
-                y={0}
-                width={SCREEN_WIDTH}
-                height={SCREEN_HEIGHT}
-                key={index}
-                setPanningEnabled={setPanningEnabled}
-                htmlCode={screen?.code}
-                projectDetail={projectDetail}
-              />:
-               <div className="bg-white rounded-2xl p-5 gap-4 flex flex-col"
-               style={{
-                width:SCREEN_WIDTH,
-                height:SCREEN_HEIGHT
-               }}>
-                <Skeleton className="w-full rounded-lg h-10 bg-gray-200"/>
-                <Skeleton className="w-[50%] rounded-lg h-20 bg-gray-200"/>
-                <Skeleton className="w-[70%] rounded-lg h-30 bg-gray-200"/>
-                <Skeleton className="w-[30%] rounded-lg h-10 bg-gray-200"/>
-                <Skeleton className="w-full rounded-lg h-10 bg-gray-200"/>
-                <Skeleton className="w-[50%] rounded-lg h-20 bg-gray-200"/>
-                <Skeleton className="w-[70%] rounded-lg h-30 bg-gray-200"/>
-                <Skeleton className="w-[30%] rounded-lg h-10 bg-gray-200"/>
-
-               </div>
-              }
-            </div>
-          ))}
-        </TransformComponent>
+        {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+          <>
+            <Controls />
+            <TransformComponent
+              wrapperStyle={{ width: "100%", height: "100%" }}
+            >
+              {screenConfig?.map((screen, index) => (
+                <div>
+                  {screen?.code ? (
+                    <ScreenFrame
+                      x={index * (SCREEN_WIDTH + GAP)}
+                      y={0}
+                      width={SCREEN_WIDTH}
+                      height={SCREEN_HEIGHT}
+                      key={index}
+                      setPanningEnabled={setPanningEnabled}
+                      htmlCode={screen?.code}
+                      projectDetail={projectDetail}
+                    />
+                  ) : (
+                    <div
+                      className="bg-white rounded-2xl p-5 gap-4 flex flex-col"
+                      style={{
+                        width: SCREEN_WIDTH,
+                        height: SCREEN_HEIGHT,
+                      }}
+                    >
+                      <Skeleton className="w-full rounded-lg h-10 bg-gray-200" />
+                      <Skeleton className="w-[50%] rounded-lg h-20 bg-gray-200" />
+                      <Skeleton className="w-[70%] rounded-lg h-30 bg-gray-200" />
+                      <Skeleton className="w-[30%] rounded-lg h-10 bg-gray-200" />
+                      <Skeleton className="w-full rounded-lg h-10 bg-gray-200" />
+                      <Skeleton className="w-[50%] rounded-lg h-20 bg-gray-200" />
+                      <Skeleton className="w-[70%] rounded-lg h-30 bg-gray-200" />
+                      <Skeleton className="w-[30%] rounded-lg h-10 bg-gray-200" />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </TransformComponent>
+          </>
+        )}
       </TransformWrapper>
     </div>
   );

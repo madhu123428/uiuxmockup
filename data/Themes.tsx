@@ -1,68 +1,100 @@
 export const THEMES = {
   GOT: {
-    background: "#0e1116",
-    foreground: "#e6e8eb",
+  /* Core surfaces */
+  background: "#0b0d10",        // near-black, cold night
+  foreground: "#e5e7eb",        // bone-white text
 
-    card: "#161b22",
-    cardForeground: "#e6e8eb",
+  card: "#14171c",              // dark stone panels
+  cardForeground: "#e5e7eb",
 
-    popover: "#161b22",
-    popoverForeground: "#e6e8eb",
+  popover: "#14171c",
+  popoverForeground: "#e5e7eb",
 
-    primary: "#c9a24d",
-    primaryRgb: "201, 162, 77",
-    primaryForeground: "#0e1116",
+  /* Primary = Iron Throne gold (muted, dirty) */
+  primary: "#b08d57",           // aged gold, NOT shiny
+  primaryRgb: "176, 141, 87",
+  primaryForeground: "#0b0d10",
 
-    secondary: "#1f2630",
-    secondaryForeground: "#e6e8eb",
+  /* Secondary = cold steel */
+  secondary: "#1c2128",
+  secondaryForeground: "#e5e7eb",
 
-    muted: "#1a202a",
-    mutedForeground: "#9da5b4",
+  /* Muted = ash / fog */
+  muted: "#181c22",
+  mutedForeground: "#9aa1ad",
 
-    accent: "#9b1c1c",
-    accentForeground: "#ffffff",
+  /* Accent = blood / fire */
+  accent: "#7f1d1d",            // deep blood red
+  accentForeground: "#f8fafc",
 
-    destructive: "#b91c1c",
+  destructive: "#991b1b",
 
-    border: "#2b3442",
-    input: "#2b3442",
-    ring: "#c9a24d",
-    radius: "0.7rem",
+  /* Borders & inputs = forged metal */
+  border: "#2a2f36",
+  input: "#2a2f36",
+  ring: "#b08d57",
 
-    chart: ["#c9a24d", "#9b1c1c", "#4b5563", "#2563eb", "#7c3aed"],
-  },
+  /* Radius = sharp medieval, not bubbly */
+  radius: "0.5rem",
+
+  /* Charts = houses palette */
+  chart: [
+    "#b08d57", // gold
+    "#7f1d1d", // blood
+    "#475569", // steel gray
+    "#1f2937", // night blue
+    "#92400e", // bronze
+  ],
+}
+,
   STRANGER_THINGS: {
-    background: "#0b0b12",
-    foreground: "#f2f2f7",
+  /* Core surfaces */
+  background: "#050506",        // pitch black
+  foreground: "#e5e7eb",        // soft white text
 
-    card: "#141420",
-    cardForeground: "#f2f2f7",
+  card: "#0b0c0f",              // slightly lifted black
+  cardForeground: "#e5e7eb",
 
-    popover: "#141420",
-    popoverForeground: "#f2f2f7",
+  popover: "#0b0c0f",
+  popoverForeground: "#e5e7eb",
 
-    primary: "#e50914",
-    primaryRgb: "229, 9, 20",
-    primaryForeground: "#ffffff",
+  /* Primary = emergency red neon */
+  primary: "#dc2626",           // deep neon red
+  primaryRgb: "220, 38, 38",
+  primaryForeground: "#ffffff",
 
-    secondary: "#1f1f2e",
-    secondaryForeground: "#f2f2f7",
+  /* Secondary = dark graphite */
+  secondary: "#111216",
+  secondaryForeground: "#e5e7eb",
 
-    muted: "#191926",
-    mutedForeground: "#9aa0b3",
+  /* Muted = foggy gray */
+  muted: "#14151a",
+  mutedForeground: "#9ca3af",
 
-    accent: "#00e5ff",
-    accentForeground: "#0b0b12",
+  /* Accent = brighter red glow */
+  accent: "#ef4444",            // glow red
+  accentForeground: "#ffffff",
 
-    destructive: "#ff3b3b",
+  destructive: "#b91c1c",
 
-    border: "#2a2a3d",
-    input: "#2a2a3d",
-    ring: "#e50914",
-    radius: "0.85rem",
+  /* Borders & inputs */
+  border: "#1f2026",
+  input: "#1f2026",
+  ring: "#dc2626",
 
-    chart: ["#e50914", "#00e5ff", "#ffb703", "#9b5cff", "#3a86ff"],
-  },
+  /* Sharp, industrial */
+  radius: "0.5rem",
+
+  /* Charts = red-only horror palette */
+  chart: [
+    "#dc2626", // main red
+    "#ef4444", // glow red
+    "#7f1d1d", // dark blood
+    "#991b1b", // muted red
+    "#450a0a", // almost black red
+  ],
+}
+,
 
   MONEY_HEIST: {
     background: "#ffffff",

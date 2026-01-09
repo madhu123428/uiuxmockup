@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect,useState } from 'react'
+import React, { useContext, useEffect,useState } from 'react'
 import ProjectHeader from './_shared/ProjectHeader'
 import SettingsSection from './_shared/SettingsSection'
 import { useParams } from 'next/navigation'
@@ -7,12 +7,14 @@ import axios from 'axios'
 import { ProjectType, ScreenConfig } from '@/type/types'
 import { Loader2Icon } from 'lucide-react'
 import Canvas from './_shared/Canvas'
+import { SettingContext } from '@/context/SettingContext'
 
 function ProjectCanvasPlayground() {
     const {projectId}=useParams();
     const [projectDetail,setProjectDetail]=useState<ProjectType>();
     const [screenConfig,setScreenConfig]=useState<ScreenConfig[]>([]);
     const [screenConfigOriginal,setScreenConfigOriginal]=useState<ScreenConfig[]>([]);
+    const {settingsDetail,setSettingDetail}=useContext(SettingContext);
     const [loading,setLoading]=useState(false);
     const [loadingMsg,setLoadingMsg]=useState('Loading')
     useEffect(()=>{
@@ -29,6 +31,7 @@ function ProjectCanvasPlayground() {
     //    if(result.data?.screenConfig?.length==0){
     //       generateScreenConfig();
     //    }
+       setSettingDetail(result?.data?.projectDetail)
        setLoading(false);
     }
     useEffect(()=>{
