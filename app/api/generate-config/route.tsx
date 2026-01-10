@@ -1,13 +1,13 @@
 import { db } from "@/config/db";
 import { openrouter } from "@/config/openroute";
 import { ProjectTable, ScreenConfigTable } from "@/config/schema";
-import { APP_LAYOUT_CONFIG_PROMPT } from "@/data/Prompt";
+import { APP_LAYOUT_CONFIG_PROMPT, GENERATE_NEW_SCREEN_IN_EXISTING_PROJECT_PROMPT } from "@/data/Prompt";
 import { currentUser } from "@clerk/nextjs/server";
 import { and, eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-  const { userInput, deviceType, projectId } = await req.json();
+  const { userInput, deviceType, projectId,oldScreenDescription,theme } = await req.json();
 
   const aiResult = await openrouter.chat.send({
     model: "kwaipilot/kat-coder-pro:free",
@@ -17,7 +17,8 @@ export async function POST(req: NextRequest) {
         content: [
           {
             type: "text",
-            text: APP_LAYOUT_CONFIG_PROMPT.replace("{deviceType}", deviceType),
+            text:oldScreenDescription? GENERATE_NEW_SCREEN_IN_EXISTING_PROJECT_PROMPT.replace("{deviceType}", deviceType).replace('{theme}',theme): 
+            APP_LAYOUT_CONFIG_PROMPT.replace("{deviceType}", deviceType),
           },
         ],
       },
@@ -26,7 +27,7 @@ export async function POST(req: NextRequest) {
         content: [
           {
             type: "text",
-            text: userInput,
+            text: oldScreenDescription?userInput+"Old Screen Description is"+oldScreenDescription :userInput,
           },
         ],
       },
@@ -38,7 +39,7 @@ export async function POST(req: NextRequest) {
 
   if (JSONAiResult) {
     //update project table with project name
-    await db.update(ProjectTable).set({
+    !oldScreenDescription&&await db.update(ProjectTable).set({
       projectVisualDescription: JSONAiResult?.projectVisualDescription,
       projectName: JSONAiResult?.projectName,
       theme:JSONAiResult?.theme

@@ -2,20 +2,27 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { RefreshDataContext } from "@/context/RefreshDataContext";
 import { SettingContext } from "@/context/SettingContext";
 import { THEME_NAME_LIST, THEMES } from "@/data/Themes";
 import { ProjectType } from "@/type/types";
-import { Camera, Share, Sparkles } from "lucide-react";
+import axios from "axios";
+import { Camera, Loader2Icon, Share, Sparkles } from "lucide-react";
 import React, { useContext, useEffect, useState } from "react";
 
 type Props = {
   projectDetail: ProjectType | undefined;
+  screenDescription?: string | undefined;
 };
-function SettingsSection({ projectDetail }: Props) {
+function SettingsSection({ projectDetail, screenDescription }: Props) {
   const [selectedTheme, setSelectedTheme] = useState("GOT");
   const [projectName, setProjectName] = useState(projectDetail?.projectName);
   const { settingsDetail, setSettingDetail } = useContext(SettingContext);
   const [userNewScreenInput, setUserNewScreenInput] = useState<string>();
+  const [loading, setLoading] = useState(false);
+  const { refreshData, setRefreshData } = useContext(RefreshDataContext);
+  const [loadingMsg,setLoadingMsg]=useState('Loading...')
+
   useEffect(() => {
     projectDetail && setProjectName(projectDetail?.projectName);
     setSelectedTheme(projectDetail?.theme as string);
@@ -31,9 +38,40 @@ function SettingsSection({ projectDetail }: Props) {
       };
     });
   };
+
+  const GenerateNewScreen = async () => {
+    try {
+      setLoading(true);
+
+      const result = await axios.post("/api/generate-config", {
+        projectId: projectDetail?.projectId,
+        projectName: projectDetail?.projectName,
+        deviceType: projectDetail?.device,
+        theme: projectDetail?.theme,
+        oldScreenDescription: screenDescription,
+      });
+      console.log(result.data);
+      setRefreshData({ method: "screenConfig", date: Date.now() });
+      setLoading(false);
+    } catch (e) {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="w-[300px]  h-[90vh] p-5 border-r">
       <h2 className="font-medium text-lg">Settings</h2>
+      {loading && (
+        <div
+          className="p-3 absolute bg-blue-300/20 left-1/2
+               mt-20  border-blue-400 border rounded-2xl"
+        >
+          <h2 className="flex gap-2 items-center">
+            <Loader2Icon className="animate-spin" />
+            {loadingMsg}
+          </h2>
+        </div>
+      )}
       <div className="mt-3">
         <h2 className="text-sm mb-1">Project Name</h2>
         <Input
@@ -54,8 +92,13 @@ function SettingsSection({ projectDetail }: Props) {
           placeholder="Enter Prompt to generate UI/UX Design"
           onChange={(event) => setUserNewScreenInput(event.target.value)}
         />
-        <Button size={"sm"} className="mt-2 w-full">
-          <Sparkles />
+        <Button
+          size={"sm"}
+          disabled={loading}
+          className="mt-2 w-full"
+          onClick={GenerateNewScreen}
+        >
+          {loading ? <Loader2Icon className="animate-spin" /> : <Sparkles />}
           Generate With AI
         </Button>
       </div>
