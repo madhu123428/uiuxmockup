@@ -21,6 +21,7 @@ type Props = {
   htmlCode: string | undefined;
   projectDetail: ProjectType | undefined;
   screen:ScreenConfig|undefined;
+  iframeRef:any
 };
 
 function ScreenFrame({
@@ -31,13 +32,14 @@ function ScreenFrame({
   height,
   htmlCode,
   projectDetail,
-  screen
+  screen,
+  iframeRef
 }: Props) {
   const { settingsDetail, setSettingDetail } = useContext(SettingContext);
   console.log("ScreenFrame theme:", settingsDetail?.theme);
   //@ts-ignore
   const theme = THEMES[settingsDetail?.theme ?? projectDetail?.theme];
-  const iframeRef = useRef<HTMLIFrameElement | null>(null);
+  //const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const html=HTMLWrapper(theme,htmlCode as string)
   const [size, setSize] = useState({ width, height });
   useEffect(() => {
