@@ -9,6 +9,7 @@ import { Loader2Icon } from 'lucide-react'
 import Canvas from './_shared/Canvas'
 import { SettingContext } from '@/context/SettingContext'
 import { RefreshDataContext } from '@/context/RefreshDataContext'
+import { DateLib } from 'react-day-picker'
 
 function ProjectCanvasPlayground() {
     const {projectId}=useParams();
@@ -19,7 +20,7 @@ function ProjectCanvasPlayground() {
     const [loading,setLoading]=useState(false);
     const [loadingMsg,setLoadingMsg]=useState('Loading')
     const {refreshData,setRefreshData}=useContext (RefreshDataContext)
-
+    const [takeScreenshot,setTakeScreenshot]=useState<any>();
     useEffect(()=>{
         projectId&&GetProjectDetail();
     },[projectId])
@@ -81,6 +82,7 @@ function ProjectCanvasPlayground() {
         }
   
         setLoading(false);
+        setTakeScreenshot(true);
     }
   return (
     <div>
@@ -93,10 +95,10 @@ function ProjectCanvasPlayground() {
 
         {/* settings */}
         <SettingsSection projectDetail={projectDetail}
-        screenDescription={screenConfig[0]?.screenDescription}/>
+        screenDescription={screenConfig[0]?.screenDescription} takeScreenshot={()=>setTakeScreenshot(false)}/>
 
         {/* canvas */}
-        <Canvas projectDetail={projectDetail} screenConfig={screenConfig} />
+        <Canvas projectDetail={projectDetail} screenConfig={screenConfig} takeScreenshot={takeScreenshot} />
       </div>
     </div>
   )

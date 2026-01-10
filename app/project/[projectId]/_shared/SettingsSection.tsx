@@ -13,8 +13,9 @@ import React, { useContext, useEffect, useState } from "react";
 type Props = {
   projectDetail: ProjectType | undefined;
   screenDescription?: string | undefined;
+  takeScreenshot:any;
 };
-function SettingsSection({ projectDetail, screenDescription }: Props) {
+function SettingsSection({ projectDetail, screenDescription,takeScreenshot }: Props) {
   const [selectedTheme, setSelectedTheme] = useState("GOT");
   const [projectName, setProjectName] = useState(projectDetail?.projectName);
   const { settingsDetail, setSettingDetail } = useContext(SettingContext);
@@ -152,7 +153,7 @@ function SettingsSection({ projectDetail, screenDescription }: Props) {
       <div className="mt-5">
         <h2 className="text-sm mb-1">Extras</h2>
         <div className="flex gap-3">
-          <Button size={"sm"} variant={"outline"} className="mt-2 ">
+          <Button size={"sm"} variant={"outline"} className="mt-2 " onClick={()=>takeScreenshot()}>
             <Camera />
             ScreenShot
           </Button>
