@@ -26,9 +26,10 @@ export default function RootLayout({
           className={`appFont.className min-h-screen bg-white dark:bg-black text-black dark:text-white`}
         >
           <Provider>{children}</Provider>
-          <Toaster position="top-center"/> 
+          <Toaster position="top-center" richColors/> 
         </body>
       </html>
     </ClerkProvider>
   );
 }
+

@@ -4,10 +4,12 @@ import axios from "axios";
 import { UserDetailContext } from "@/context/UserDetailContext";
 import { set } from "date-fns";
 import { SettingContext } from "@/context/SettingContext";
+import { RefreshDataContext } from "@/context/RefreshDataContext";
 
 function Provider({ children }: any) {
   const [userDetail, setUserDetail] = useState<any>(null);
   const [settingsDetail, setSettingDetail] = useState();
+  const [refreshData,setRefreshData]=useState();
   useEffect(() => {
     CreateNewUser();
   }, []);
@@ -23,7 +25,9 @@ function Provider({ children }: any) {
     <div>
       <UserDetailContext.Provider value={{ userDetail, setUserDetail }}>
         <SettingContext.Provider value={{ settingsDetail, setSettingDetail }}>
+          <RefreshDataContext.Provider value={{refreshData,setRefreshData}}>
           <div>{children}</div>
+          </RefreshDataContext.Provider>
         </SettingContext.Provider>
       </UserDetailContext.Provider>
     </div>
