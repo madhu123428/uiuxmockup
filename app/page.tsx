@@ -8,7 +8,6 @@ import ProjectList from "./_shared/ProjectList";
 export default function Home() {
   return (
     <div>
-      <Header />
       <Hero />
       <ProjectList />
       <div className="absolute -top-40 -left-40 h-[500px] w-[500px] bg-purple-400/20 from-primary to-secondary rounded-full blur-3xl"></div>
