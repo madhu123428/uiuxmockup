@@ -1,72 +1,53 @@
 import { db } from "@/config/db";
-import { ProjectTable, ScreenConfigTable } from "@/config/schema";
+import { ProjectTable } from "@/config/schema";
 import { currentUser } from "@clerk/nextjs/server";
-import { error } from "console";
-import { and, desc, eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest) {
-  const { userInput, device, projectId } = await req.json();
+export async function GET() {
   const user = await currentUser();
+
+  if (!user?.primaryEmailAddress?.emailAddress) {
+    return NextResponse.json(
+      { error: "Unauthorized" },
+      { status: 401 }
+    );
+  }
+
+  const projects = await db
+    .select()
+    .from(ProjectTable)
+    .where(
+      eq(
+        ProjectTable.userId,
+        user.primaryEmailAddress.emailAddress
+      )
+    )
+    .orderBy(desc(ProjectTable.id));
+
+  return NextResponse.json(projects);
+}
+
+export async function POST(req: NextRequest) {
+  const user = await currentUser();
+  if (!user?.primaryEmailAddress?.emailAddress) {
+    return NextResponse.json(
+      { error: "Unauthorized" },
+      { status: 401 }
+    );
+  }
+
+  const { userInput, device, projectId } = await req.json();
 
   const result = await db
     .insert(ProjectTable)
     .values({
-      projectId: projectId,
-      userId: user?.primaryEmailAddress?.emailAddress as string,
-      device: device,
-      userInput: userInput,
+      projectId,
+      userId: user.primaryEmailAddress.emailAddress,
+      device,
+      userInput,
     })
     .returning();
+
   return NextResponse.json(result[0]);
-}
-export async function GET(req: NextRequest) {
-  const projectId = await req.nextUrl.searchParams.get("projectId");
-  const user = await currentUser();
-  try {
-    if(!projectId){
-      const result = await db
-      .select()
-      .from(ProjectTable)
-      .where(
-          eq(
-            ProjectTable.userId,
-            user?.primaryEmailAddress?.emailAddress as string
-          )
-        ).orderBy(desc(ProjectTable.id));
-
-        return NextResponse.json(result)
-    }
-    const result = await db
-      .select()
-      .from(ProjectTable)
-      .where(
-        and(
-          eq(ProjectTable.projectId, projectId as string),
-          eq(
-            ProjectTable.userId,
-            user?.primaryEmailAddress?.emailAddress as string
-          )
-        )
-      );
-      const ScreenConfig=await db.select().from(ScreenConfigTable)
-      .where(eq(ScreenConfigTable.projectId,projectId as string))
-    return NextResponse.json({
-        projectDetail: result[0],
-        screenConfig: ScreenConfig
-    });
-  } catch (e) {
-    return NextResponse.json({ error: e });
-  }
-}
-
-export async function PUT(req:NextRequest) {
-    const {projectName,theme,projectId,screenShot}=await req.json();
-    const result=await db.update(ProjectTable).set({
-      projectName:projectName,
-      theme:theme,
-      screenshot:screenShot as string??null
-    }).where(eq(ProjectTable.projectId,projectId)).
-    returning();
-    return NextResponse.json(result[0]);
 }
